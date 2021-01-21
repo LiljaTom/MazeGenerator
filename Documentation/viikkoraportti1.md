@@ -1,6 +1,6 @@
 # Viikko 1
 
-[Tuntikirjanpito](../tuntikirjanpito.md)
+[Tuntikirjanpito](./tuntikirjanpito.md)
 
 ## Viikon tapahtumat
 
@@ -8,6 +8,7 @@
 * Projektin alustaminen
 * Aiheeseen tutustuminen
 
+Lisäksi tein itselleni demo version sovelluksesta, minkä avulla pystyin harjoitella sokkeloiden/labyrinttien luomista satunnaisella Primin algoritmilla.
 
 ## Ohjelman edityminen
 
