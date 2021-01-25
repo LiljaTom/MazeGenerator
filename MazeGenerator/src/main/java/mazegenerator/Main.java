@@ -1,15 +1,14 @@
 
 package mazegenerator;
 
-/**
- *
- * @author lilja
- */
+import javafx.application.Application;
+import mazegenerator.ui.MazeUi;
+
 public class Main {
     
     
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Application.launch(MazeUi.class);
     }
     
 }
