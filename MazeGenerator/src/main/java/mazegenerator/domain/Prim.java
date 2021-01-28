@@ -11,7 +11,6 @@ public class Prim {
     private boolean[][] frontiers;
     private ArrayList<Cell> frontiersList;
 
-
     public Prim(int width, int height) {
         this.width = width;
         this.height = height;
@@ -24,9 +23,7 @@ public class Prim {
 
     public void initMaze(int y, int x) {
         this.paths[y][x] = true;
-        this.frontiers[y][x] = true;
         frontierCells(y, x);
-
     }
 
     /*
@@ -51,29 +48,26 @@ public class Prim {
 
         return pathsToFill;
     }
-    */
-    
+     */
     public void createMaze(int y, int x) {
         Random rnd = new Random();
-        
+
         this.frontiers[y][x] = true;
         this.paths[y][x] = true;
         frontierCells(y, x);
-        
-        while(!this.frontiersList.isEmpty()) {
+
+        while (!this.frontiersList.isEmpty()) {
             int index = rnd.nextInt(frontiersList.size());
-            
+
             Cell frontier = frontiersList.get(index);
             Cell neighbour = randomNeighbour(frontier.getY(), frontier.getX());
-            
+
             connect(frontier, neighbour);
             frontierCells(frontier.getY(), frontier.getX());
             paths[frontier.getY()][frontier.getX()] = true;
             frontiersList.remove(index);
-            
+
         }
-        
-        
     }
 
     public void connect(Cell start, Cell end) {
@@ -197,7 +191,31 @@ public class Prim {
     public boolean[][] getPaths() {
         return paths;
     }
-    
-    
+
+    public ArrayList<Cell> getFrontiersList() {
+        return frontiersList;
+    }
+
+    public boolean[][] getFrontiers() {
+        return frontiers;
+    }
+
+    public int getPathCount() {
+        int count = 0;
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (paths[y][x]) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    public int getWallCount() {
+        return width * height - getPathCount();
+    }
 
 }
