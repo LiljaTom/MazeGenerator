@@ -6,4 +6,6 @@
 | 21.1.2021 | 3 | Määrittelydokumentaatio, projektin alustus ja muu dokumentaatio |
 | 25.1.2021 | 4 | Primin ensimmäinen versio |
 | 26.1.2021 | 2 | Ensimmäisen version viimeistely ja testauksen aloitus |
-| yht. | 8 | |
+| 28.1.2021 | 1 | Testikattavuuden ja checkstylen lisääminen |
+| 30.1.2021 | 2 | Apuluokan ja sen testien luominen |
+| yht. | 16 | |
