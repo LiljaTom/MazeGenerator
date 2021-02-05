@@ -31,12 +31,16 @@ public class Prim {
         this.frontiers = new boolean[height][width];
 
         this.frontiersList = new ArrayList<>();
+        
+        helper = new MazeHelper(height, width);
     }
 
+    /*
     public void initMaze(int y, int x) {
         this.paths[y][x] = true;
         frontierCells(y, x);
     }
+    */
 
     /*
     public ArrayList nextPath() {
@@ -70,7 +74,25 @@ public class Prim {
      */
     public void createMaze(int y, int x) {
         Random rnd = new Random();
-
+        
+        helper.getFrontiers()[y][x] = true;
+        helper.getPaths()[y][x] = true;
+        helper.addFrontierCells(y, x);
+        
+        while(!helper.getFrontierCells().isEmpty()) {
+            int index = rnd.nextInt(helper.frontierlistSize());
+            
+            Cell frontier = helper.getFrontierCells().get(index);
+            Cell neighbour = randomNeighbour(frontier.getY(), frontier.getX());
+            
+            helper.connect(frontier.getY(), frontier.getX(), neighbour.getY(), neighbour.getX());
+            helper.addFrontierCells(frontier.getY(), frontier.getX());
+            helper.getPaths()[frontier.getY()][frontier.getX()] = true;
+            
+            helper.getFrontierCells().remove(index);
+        }
+        
+        /*
         this.frontiers[y][x] = true;
         this.paths[y][x] = true;
         frontierCells(y, x);
@@ -87,14 +109,10 @@ public class Prim {
             frontiersList.remove(index);
 
         }
+        */
     }
-
-    /**
-     * Connects path between start and end cells.
-     * 
-     * @param start start cell
-     * @param end end cell
-     */
+    
+    /*
     public void connect(Cell start, Cell end) {
         int startX = start.getX();
         int startY = start.getY();
@@ -125,7 +143,8 @@ public class Prim {
         this.paths[endY][endX] = true;
 
     }
-
+    */
+    /*
     public boolean inGrid(int y, int x) {
 
         if (y > 0 && x > 0 && y < height - 1 && x < width - 1) {
@@ -134,7 +153,9 @@ public class Prim {
 
         return false;
     }
+    */
 
+    /*
     public void frontierCells(int y, int x) {
         int rightX = x + 2;
         int leftX = x - 2;
@@ -174,6 +195,7 @@ public class Prim {
         }
 
     }
+    */
 
     public Cell randomNeighbour(int y, int x) {
         ArrayList<Cell> neighbours = new ArrayList<>();
@@ -183,26 +205,26 @@ public class Prim {
         int upY = y - 2;
         int downY = y + 2;
 
-        if (inGrid(y, rightX)) {
-            if (paths[y][rightX]) {
+        if (helper.inGrid(y, rightX)) {
+            if (helper.getPaths()[y][rightX]) {
                 neighbours.add(new Cell(y, rightX));
             }
         }
 
-        if (inGrid(y, leftX)) {
-            if (paths[y][leftX]) {
+        if (helper.inGrid(y, leftX)) {
+            if (helper.getPaths()[y][leftX]) {
                 neighbours.add(new Cell(y, leftX));
             }
         }
 
-        if (inGrid(upY, x)) {
-            if (paths[upY][x]) {
+        if (helper.inGrid(upY, x)) {
+            if (helper.getPaths()[upY][x]) {
                 neighbours.add(new Cell(upY, x));
             }
         }
 
-        if (inGrid(downY, x)) {
-            if (paths[downY][x]) {
+        if (helper.inGrid(downY, x)) {
+            if (helper.getPaths()[downY][x]) {
                 neighbours.add(new Cell(downY, x));
             }
         }
@@ -214,15 +236,15 @@ public class Prim {
     }
 
     public boolean[][] getPaths() {
-        return paths;
+        return helper.getPaths();
     }
 
     public ArrayList<Cell> getFrontiersList() {
-        return frontiersList;
+        return helper.getFrontierCells();
     }
 
     public boolean[][] getFrontiers() {
-        return frontiers;
+        return helper.getFrontiers();
     }
 
     public int getPathCount() {
