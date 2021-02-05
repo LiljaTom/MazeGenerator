@@ -3,6 +3,11 @@ package mazegenerator.domain;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Class which builds maze using prim's algorithm
+ * 
+ * @author lilja
+ */
 public class Prim {
 
     private int width;
@@ -10,7 +15,14 @@ public class Prim {
     private boolean[][] paths;
     private boolean[][] frontiers;
     private ArrayList<Cell> frontiersList;
+    private MazeHelper helper;
 
+    /**
+     * Initializes prim class
+     * 
+     * @param width maze width
+     * @param height maze height
+     */
     public Prim(int width, int height) {
         this.width = width;
         this.height = height;
@@ -49,6 +61,13 @@ public class Prim {
         return pathsToFill;
     }
      */
+    
+    /**
+     * Creates complete maze using randomized prim's algorithm
+     * 
+     * @param y y coordinate
+     * @param x x coordinate
+     */
     public void createMaze(int y, int x) {
         Random rnd = new Random();
 
@@ -70,6 +89,12 @@ public class Prim {
         }
     }
 
+    /**
+     * Connects path between start and end cells.
+     * 
+     * @param start start cell
+     * @param end end cell
+     */
     public void connect(Cell start, Cell end) {
         int startX = start.getX();
         int startY = start.getY();
