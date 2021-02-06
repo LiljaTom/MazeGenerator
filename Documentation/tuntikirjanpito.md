@@ -10,4 +10,4 @@
 | 30.1.2021 | 2 | Apuluokan ja sen testien luominen |
 | 5.2.2021 | 5 | Javadocin lisääminen, apuluokan ja sen testien laajentaminen, apuluokan käyttöönotto, lisää testejä |
 | 6.2.2021 | 1 | Testejä |
-| yht. | 16 | |
+| yht. | 22 | |
