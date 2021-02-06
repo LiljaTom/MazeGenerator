@@ -16,7 +16,7 @@ public class MazeHelper {
     private ArrayList<Cell> frontierCells;
 
     /**
-     * Initializes MazeHelper class
+     * Constructor for MazeHelper, initializes object.
      *
      * @param height maze height
      * @param width maze width
@@ -112,8 +112,17 @@ public class MazeHelper {
             frontiers[downY][x] = true;
         }
     }
-
+    
+    /**
+     * Connects path between starting and end cells
+     * 
+     * @param startY start cell's y coordinate
+     * @param startX start cell's x coordinate
+     * @param endY end cell's y coordinate
+     * @param endX end cell's x coordinate
+     */
     public void connect(int startY, int startX, int endY, int endX) {
+        this.paths[startY][startX] = true;
         //Same row
         if (startX == endX) {
             //start is up
@@ -133,7 +142,7 @@ public class MazeHelper {
                 this.paths[startY][startX - 1] = true;
             }
         }
-        
+
         paths[endY][endX] = true;
     }
 
@@ -161,6 +170,10 @@ public class MazeHelper {
         return frontierCells.size();
     }
 
+    /**
+     * 
+     * @return frontiercell list
+     */
     public ArrayList<Cell> getFrontierCells() {
         return frontierCells;
     }

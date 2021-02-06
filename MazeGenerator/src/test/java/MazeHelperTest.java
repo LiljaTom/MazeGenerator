@@ -1,4 +1,5 @@
 
+import mazegenerator.domain.Cell;
 import mazegenerator.domain.MazeHelper;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -193,6 +194,78 @@ public class MazeHelperTest {
         helper.initMaze(y, x);
 
         assertTrue(helper.getPaths()[y][x]);
+    }
+
+    @Test
+    public void connectRight() {
+        int startY = 1;
+        int startX = 1;
+
+        int endY = 1;
+        int endX = 3;
+
+        helper.connect(startY, startX, endY, endX);
+
+        boolean startPath = helper.getPaths()[startY][startX];
+        boolean endPath = helper.getPaths()[endY][endX];
+        boolean middle = helper.getPaths()[1][2];
+        boolean result = startPath && middle && endPath;
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void connectDown() {
+        int startY = 1;
+        int startX = 1;
+
+        int endY = 3;
+        int endX = 1;
+
+        helper.connect(startY, startX, endY, endX);
+
+        boolean startPath = helper.getPaths()[startY][startX];
+        boolean endPath = helper.getPaths()[endY][endX];
+        boolean middle = helper.getPaths()[2][1];
+        boolean result = startPath && middle && endPath;
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void connectUp() {
+        int startY = 5;
+        int startX = 5;
+
+        int endY = 3;
+        int endX = 5;
+
+        helper.connect(startY, startX, endY, endX);
+
+        boolean startPath = helper.getPaths()[startY][startX];
+        boolean endPath = helper.getPaths()[endY][endX];
+        boolean middle = helper.getPaths()[4][5];
+        boolean result = startPath && middle && endPath;
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void connectLeft() {
+        int startY = 5;
+        int startX = 5;
+
+        int endY = 5;
+        int endX = 3;
+
+        helper.connect(startY, startX, endY, endX);
+
+        boolean startPath = helper.getPaths()[startY][startX];
+        boolean endPath = helper.getPaths()[endY][endX];
+        boolean middle = helper.getPaths()[5][4];
+        boolean result = startPath && middle && endPath;
+
+        assertTrue(result);
     }
 
 }
