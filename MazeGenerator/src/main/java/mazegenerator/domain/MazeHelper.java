@@ -13,7 +13,7 @@ public class MazeHelper {
     private int width;
     private boolean[][] paths;
     private boolean[][] frontiers;
-    private ArrayList<Cell> frontierCells;
+    private MazeArray<Cell> frontierCells;
 
     /**
      * Constructor for MazeHelper, initializes object.
@@ -27,7 +27,7 @@ public class MazeHelper {
 
         this.paths = new boolean[height][width];
         this.frontiers = new boolean[height][width];
-        this.frontierCells = new ArrayList<>();
+        this.frontierCells = new MazeArray<>();
     }
 
     /**
@@ -145,6 +145,33 @@ public class MazeHelper {
 
         paths[endY][endX] = true;
     }
+    
+    public Cell getRandomNeighbour(int y, int x) {
+        MazeArray<Cell> neighbours = new MazeArray<>();
+        
+        int rightX = x + 2;
+        int leftX = x - 2;
+        int upY = y - 2;
+        int downY = y + 2;
+        
+        if(inGrid(y, rightX) && paths[y][rightX]) {
+            neighbours.add(new Cell(y, rightX));
+        }
+        
+        if(inGrid(y, leftX) && paths[y][leftX]) {
+            neighbours.add(new Cell(y, leftX));
+        }
+        
+        if(inGrid(upY, x) && paths[upY][x]) {
+            neighbours.add(new Cell(upY, x));
+        }
+        
+        if(inGrid(downY, x) && paths[downY][x]) {
+            neighbours.add(new Cell(downY, x));
+        }  
+        
+        return neighbours.getRandom();
+    }
 
     /**
      *
@@ -174,7 +201,7 @@ public class MazeHelper {
      * 
      * @return frontiercell list
      */
-    public ArrayList<Cell> getFrontierCells() {
+    public MazeArray<Cell> getFrontierCells() {
         return frontierCells;
     }
 
