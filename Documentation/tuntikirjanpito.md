@@ -12,5 +12,5 @@
 | 6.2.2021 | 1 | Testejä |
 | 11.2.2021 | 1 | Oman tietorakenneluokan luominen |
 | 12.2.2021 | 5 | lista luokan laajennus, testejä, laajennuksien käyttöönotto |
-| 13.2.2021 | 4 | Kruskalin aloitus, Array luokan laajennus, testejä, dokumentaation kirjoitusta |
-| yht. | 25 | |
+| 13.2.2021 | 5 | Kruskalin aloitus, Array luokan laajennus, testejä, dokumentaation kirjoitusta |
+| yht. | 33 | |
