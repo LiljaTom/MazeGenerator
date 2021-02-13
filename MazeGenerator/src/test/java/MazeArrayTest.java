@@ -118,4 +118,43 @@ public class MazeArrayTest {
         assertFalse(array.contains(new Cell(2, 1)));
     }
     
+    @Test
+    public void removeObjectRemovesCorrectObject() {
+        Cell toRemove = new Cell(3, 5);
+        array.add(new Cell(1, 2));
+        array.add(new Cell(2, 1));
+        array.add(new Cell(3, 1));
+        array.add(toRemove);
+        
+        array.removeObject(toRemove);
+        
+        assertFalse(array.contains(toRemove));
+    }
+    
+    @Test
+    public void removeObjectRemovesObject() {
+        Cell toRemove = new Cell(3, 5);
+        array.add(new Cell(1, 2));
+        array.add(new Cell(2, 1));
+        array.add(new Cell(3, 1));
+        array.add(toRemove);
+        
+        array.removeObject(toRemove);
+        
+        assertEquals(3, array.size());
+    }
+    
+    @Test
+    public void removeObjectRemovesNothingIfNotContains() {
+        Cell toRemove = new Cell(3, 5);
+        array.add(new Cell(1, 2));
+        array.add(new Cell(2, 1));
+        array.add(new Cell(3, 1));
+        
+        array.removeObject(toRemove);
+        
+        assertEquals(3, array.size());
+    }
+    
+    
 }

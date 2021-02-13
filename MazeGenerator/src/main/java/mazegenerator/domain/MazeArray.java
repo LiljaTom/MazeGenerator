@@ -38,10 +38,24 @@ public class MazeArray<T> {
     }
     
     public void remove(int index) {
-        for (int i = index; i < objects.length - 1; i++) {
-            objects[i] = objects[i + 1];            
-        }
+        moveLeft(index);
         count--;        
+    }
+    
+    public void removeObject(T obj) {
+        for(int i = 0; i < objects.length; i++) {
+            if(obj.equals(objects[i])) {
+                moveLeft(i);
+                count--;
+                break;
+            }
+        }
+    }
+    
+    private void moveLeft(int index) {
+        for(int i = index; i < objects.length - 1; i++) {
+            objects[i] = objects[i + 1];
+        }
     }
     
     private void increase() {
