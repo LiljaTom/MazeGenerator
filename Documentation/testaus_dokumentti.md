@@ -12,7 +12,7 @@ Testikattavuusraportti luodaan komennolla
 mvn jacoco:report
 ```
 
-[Testikattavuus](https://github.com/LiljaTom/MazeGenerator/blob/main/Documentation/Pictures/testikattavuus.png)
+![Testikattavuus](https://github.com/LiljaTom/MazeGenerator/blob/main/Documentation/Pictures/testikattavuus.png)
 
 ## Checkstyle
 
