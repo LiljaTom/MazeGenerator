@@ -88,9 +88,11 @@ public class MazeArray<T> {
         if (count == 0) {
             return null;
         }
-        int index = (int) System.nanoTime() % count;
+        long index = System.nanoTime() % count;
+        int i = (int) index;
+        
 
-        return objects[index];
+        return objects[i];
     }
 
     public boolean contains(T obj) {
