@@ -267,5 +267,43 @@ public class MazeHelperTest {
 
         assertTrue(result);
     }
+    
+    @Test
+    public void getRandomNeighbourWithNoValidNeighboursReturnsNull() {
+        assertNull(helper.getRandomNeighbour(1, 1));
+    }
+    
+    @Test
+    public void getRandomNeighbourReturnsSomething() {
+        helper.getPaths()[1][3] = true;
+        
+        assertNotNull(helper.getRandomNeighbour(1, 1));
+    }
+    
+    @Test
+    public void getRandomNeighbourWithOneValidReturnsIt() {
+        helper.getPaths()[1][3] = true;
+        Cell valid = new Cell(1, 3);
+        
+        assertEquals(valid, helper.getRandomNeighbour(1, 1));
+    }
+    
+    /*
+    @Test
+    public void getRandomNeighbourWithTwoValidCells() {
+        helper.getPaths()[1][3] = true;
+        helper.getPaths()[3][1] = true;
+        helper.getPaths()[2][2] = true;
+        
+        Cell first = new Cell(1, 3);
+        Cell second = new Cell(3, 1);
+        
+        Cell random = helper.getRandomNeighbour(1, 1);
+        
+        
+        
+        assertTrue(random.equals(first) || random.equals(second));
+    }
+    */
 
 }

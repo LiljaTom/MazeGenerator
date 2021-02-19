@@ -1,7 +1,5 @@
 package mazegenerator.domain;
 
-import java.util.ArrayList;
-
 /**
  * Helper class which contains methods that help with maze operations
  *

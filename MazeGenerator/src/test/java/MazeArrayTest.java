@@ -19,141 +19,174 @@ public class MazeArrayTest {
     }
     
     @Test
-    public void sizeReturnsCorrectValue() {
-        array.add(new Cell(2, 2));
-        array.add(new Cell(3, 4));
+    public void constructorSetsCorrectArrayLength() {
+        assertEquals(5, array.arrayLength());
+    }
+    
+    @Test
+    public void constructorSetsCountRight() {
+        assertEquals(0, array.size());
+    }
+    
+    @Test
+    public void canAddObjects() {
+        array.add(new Cell(1, 1));
+        array.add(new Cell(2, 1));
         
         assertEquals(2, array.size());
     }
     
     @Test
-    public void addWorks() {
-        array.add(new Cell(2, 2));
-        
-        assertEquals(1, array.size());
+    public void addDoublesSizeIfNeeded() {
+        for(int i = 0; i < 6; i++) {
+            array.add(new Cell(1, i));
+        }
+
+        assertEquals(10, array.arrayLength());
     }
     
     @Test
-    public void listLengthIncreases() {
-        for (int i = 0; i < 5; i++) {
-            array.add(new Cell(i, 1));
+    public void sizeReturnsCount() {
+        for(int i = 0; i < 6; i++) {
+            array.add(new Cell(1, i));
         }
-        array.add(new Cell(5, 5));
-        
         assertEquals(6, array.size());
     }
     
     @Test
-    public void getRandomReturnsRandom() {
-        array.add(new Cell(1, 1));
-        
-        assertNotNull(array.getRandom());
-    }
-    
-    @Test
-    public void isEmptyReturnsTrueWhenEmpty() {
-        assertTrue(array.isEmpty());
-    }
-    
-    @Test
-    public void isEmptyReturnsFalseWhenNotEmpty() {
+    public void containsReturnsTrueIfContains() {
+        Cell cell = new Cell(1, 1);
         array.add(new Cell(1, 2));
+        array.add(cell);
         
-        assertFalse(array.isEmpty());
+        assertTrue(array.contains(cell));
     }
     
     @Test
-    public void containsReturnsTrueIfContainsObject() {
-        array.add(new Cell(1, 2));
-        array.add(new Cell(2, 1));
+    public void containsReturnsFalseIfNotContains() {
+        Cell cell = new Cell(1, 1);
         
-        assertTrue(array.contains(new Cell(1, 2)));
-    }
-    
-    @Test
-    public void containsReturnsFalseIfNotContainsObject() {
-        array.add(new Cell(1, 2));
-        array.add(new Cell(2, 1));
-        
-        assertFalse(array.contains(new Cell(3, 2)));
+        assertFalse(array.contains(cell));
     }
     
     @Test
     public void getReturnsNullIfInvalidIndex() {
+        array.add(new Cell(1, 1));
+        assertNull(array.get(-1));
+    }
+    
+    @Test
+    public void getReturnsNullIfIndexGreaterThanSize() {
+        array.add(new Cell(1, 1));
         assertNull(array.get(1));
     }
     
     @Test
-    public void getReturnsCorrectObject() {
-        Cell cell = new Cell(2, 1);
-        array.add(new Cell(5, 5));
-        array.add(cell);
+    public void getReturnsCorrect() {
+        Cell cell = new Cell(1, 1);
         array.add(new Cell(1, 2));
+        array.add(cell);
+        array.add(new Cell(1, 3));
         
         assertEquals(cell, array.get(1));
     }
     
     @Test
-    public void getReturnsNullIfIndexUnderZero() {
-        assertNull(array.get(-1));
+    public void objectsIndexReturnsCorrect() {
+        Cell cell = new Cell(1, 1);
+        array.add(cell);
+        array.add(new Cell(1, 3));
+        
+        assertEquals(0, array.objectsIndex(cell));
     }
     
     @Test
-    public void removeReducesSize() {
-        array.add(new Cell(1, 2));
-        array.add(new Cell(2, 1));
+    public void objectsIndexReturnsMinusOneIfNotContains() {
+        Cell cell = new Cell(1, 1);
+        array.add(new Cell(1, 3));
         
-        array.remove(1);
-        
-        assertEquals(1, array.size());
+        assertEquals(-1, array.objectsIndex(cell));
     }
     
     @Test
-    public void removeRemovesCorrectObject() {
+    public void isEmptyReturnsTrueWhenListEmpty() {
+        assertTrue(array.isEmpty());
+    }
+    
+    @Test
+    public void isEmptyReturnsFalseWhenListNotEmpty() {
+        array.add(new Cell(1, 1));
+        
+        assertFalse(array.isEmpty());
+    }
+    
+    @Test
+    public void moveLeftsWorks() {
+        Cell cell = new Cell(1, 1);
         array.add(new Cell(1, 2));
         array.add(new Cell(2, 1));
+        array.add(cell);
+        
+        array.moveLeft(1);
+        
+        assertEquals(cell, array.get(1));
+    }
+    
+    @Test
+    public void removeDecreasesCount() {
+        Cell cell = new Cell(1, 1);
+        array.add(new Cell(1, 2));
+        array.add(new Cell(2, 1));
+        array.add(cell);
         
         array.remove(1);
         
-        assertFalse(array.contains(new Cell(2, 1)));
+        assertEquals(2, array.size());
+    }
+    
+    @Test
+    public void removeRemovesObject() {
+        Cell cell = new Cell(1, 1);
+        array.add(new Cell(1, 2));
+        array.add(new Cell(2, 1));
+        array.add(cell);
+        
+        array.remove(2);
+        
+        assertFalse(array.contains(cell));
+    }
+    
+    @Test
+    public void removeDoesNothingIfInvaldiIndex() {
+        Cell cell = new Cell(1, 1);
+        array.add(new Cell(1, 2));
+        array.add(new Cell(2, 1));
+        array.add(cell);
+        
+        array.remove(3);
+        
+        assertEquals(3, array.size());
+    }
+    
+    @Test
+    public void removeObjectDoesNothingIfNotContains() {
+        Cell cell = new Cell(1, 1);
+        array.add(new Cell(1, 2));
+        array.add(new Cell(2, 1));
+        array.removeObject(cell);
+        
+        assertEquals(2, array.size());
     }
     
     @Test
     public void removeObjectRemovesCorrectObject() {
-        Cell toRemove = new Cell(3, 5);
+        Cell cell = new Cell(1, 1);
         array.add(new Cell(1, 2));
         array.add(new Cell(2, 1));
-        array.add(new Cell(3, 1));
-        array.add(toRemove);
+        array.add(cell);
+        array.removeObject(cell);
         
-        array.removeObject(toRemove);
-        
-        assertFalse(array.contains(toRemove));
-    }
-    
-    @Test
-    public void removeObjectRemovesObject() {
-        Cell toRemove = new Cell(3, 5);
-        array.add(new Cell(1, 2));
-        array.add(new Cell(2, 1));
-        array.add(new Cell(3, 1));
-        array.add(toRemove);
-        
-        array.removeObject(toRemove);
-        
-        assertEquals(3, array.size());
-    }
-    
-    @Test
-    public void removeObjectRemovesNothingIfNotContains() {
-        Cell toRemove = new Cell(3, 5);
-        array.add(new Cell(1, 2));
-        array.add(new Cell(2, 1));
-        array.add(new Cell(3, 1));
-        
-        array.removeObject(toRemove);
-        
-        assertEquals(3, array.size());
+        assertEquals(2, array.size());
     }
     
     

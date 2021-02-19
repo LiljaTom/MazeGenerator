@@ -19,6 +19,7 @@ public class Prim {
      */
     public Prim(int width, int height) {
         helper = new MazeHelper(height, width);
+        helper.initMaze(1, 1);
     }
 
     /**
@@ -47,6 +48,26 @@ public class Prim {
             helper.getFrontierCells().remove(index);
         }
 
+    }
+    
+    /**
+     * Step by step builds maze
+     */
+    public void buildMaze() {
+        Random rnd = new Random();
+        
+        if(!helper.getFrontierCells().isEmpty()) {
+            int index = rnd.nextInt(helper.frontierlistSize());
+
+            Cell frontier = helper.getFrontierCells().get(index);
+            Cell neighbour = helper.getRandomNeighbour(frontier.getY(), frontier.getX());
+
+            helper.connect(frontier.getY(), frontier.getX(), neighbour.getY(), neighbour.getX());
+            helper.addFrontierCells(frontier.getY(), frontier.getX());
+            helper.getPaths()[frontier.getY()][frontier.getX()] = true;
+
+            helper.getFrontierCells().remove(index);
+        }
     }
 
     public boolean[][] getPaths() {
