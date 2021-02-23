@@ -288,7 +288,7 @@ public class MazeHelperTest {
         assertEquals(valid, helper.getRandomNeighbour(1, 1));
     }
     
-    /*
+    
     @Test
     public void getRandomNeighbourWithTwoValidCells() {
         helper.getPaths()[1][3] = true;
@@ -300,10 +300,26 @@ public class MazeHelperTest {
         
         Cell random = helper.getRandomNeighbour(1, 1);
         
+        boolean answer = random.equals(first) || random.equals(second);
         
-        
-        assertTrue(random.equals(first) || random.equals(second));
+        assertTrue(answer);
     }
-    */
+    
+    @Test
+    public void getRandomNeighbourWithThreeValidCells() {
+        helper.getPaths()[3][1] = true;
+        helper.getPaths()[3][5] = true;
+        helper.getPaths()[1][3] = true;
+        
+        Cell first = new Cell(3, 5);
+        Cell second = new Cell(3, 1);
+        Cell third = new Cell(1, 3);
+        
+        Cell random = helper.getRandomNeighbour(3, 3);
+        
+        boolean answer = random.equals(first) || random.equals(second) || random.equals(third);
+        
+        assertTrue(answer);
+    }
 
 }

@@ -1,6 +1,5 @@
 package mazegenerator.ui;
 
-import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -23,7 +22,7 @@ public class MazeUi extends Application {
     @Override
     public void init() {
         this.n = 55;
-        this.prim = new Prim(55, 55);
+        //this.prim = new Prim(55, 55);
         this.prim.createMaze(1, 1);
         this.kruskal = new Kruskal(11, 11);
     }
@@ -59,7 +58,7 @@ public class MazeUi extends Application {
         */
         
         
-        this.prim = new Prim(55, 55);
+        //this.prim = new Prim(55, 55);
 
         new AnimationTimer() {
 

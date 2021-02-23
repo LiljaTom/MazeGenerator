@@ -16,10 +16,12 @@ public class Prim {
      *
      * @param width maze width
      * @param height maze height
+     * @param y y coordinate to initialize maze
+     * @param x x coordinate to initialize maze
      */
-    public Prim(int width, int height) {
+    public Prim(int width, int height, int y, int x) {
         helper = new MazeHelper(height, width);
-        helper.initMaze(1, 1);
+        helper.initMaze(y, x);
     }
 
     /**
@@ -51,7 +53,7 @@ public class Prim {
     }
     
     /**
-     * Step by step builds maze
+     * Step by step builds the maze
      */
     public void buildMaze() {
         Random rnd = new Random();
