@@ -2,7 +2,6 @@
 import mazegenerator.domain.Cell;
 import mazegenerator.domain.MazeHelper;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -267,59 +266,113 @@ public class MazeHelperTest {
 
         assertTrue(result);
     }
-    
+
+    @Test
+    public void connectLeftAddsCorrectPathsToNewPaths() {
+        Cell mid = new Cell(1, 2);
+        Cell start = new Cell(1, 3);
+        helper.connect(1, 3, 1, 1);
+
+        boolean ans = helper.getNewPaths().contains(mid) && helper.getNewPaths().contains(start);
+
+        assertTrue(ans);
+    }
+
+    @Test
+    public void connectRightAddsCorrectPathsToNewPaths() {
+        Cell mid = new Cell(2, 1);
+        Cell start = new Cell(3, 1);
+        helper.connect(3, 1, 2, 1);
+
+        boolean ans = helper.getNewPaths().contains(mid) && helper.getNewPaths().contains(start);
+
+        assertTrue(ans);
+    }
+
+    @Test
+    public void connectUpAddsCorrectPathsToNewPaths() {
+        helper.getPaths()[3][3] = true;
+        helper.getPaths()[1][3] = true;
+        
+        Cell mid = new Cell(2, 3);
+        Cell start = new Cell(3, 3);
+        helper.connect(3, 3, 1, 3);
+
+        boolean ans = helper.getNewPaths().contains(mid) && helper.getNewPaths().contains(start);
+
+        assertTrue(ans);
+    }
+
+    @Test
+    public void connectDownAddsCorrectPathsToNewPaths() {
+        Cell mid = new Cell(2, 1);
+        Cell start = new Cell(1, 1);
+        helper.connect(1, 1, 2, 1);
+
+        boolean ans = helper.getNewPaths().contains(mid) && helper.getNewPaths().contains(start);
+
+        assertTrue(ans);
+    }
+
     @Test
     public void getRandomNeighbourWithNoValidNeighboursReturnsNull() {
         assertNull(helper.getRandomNeighbour(1, 1));
     }
-    
+
     @Test
     public void getRandomNeighbourReturnsSomething() {
         helper.getPaths()[1][3] = true;
-        
+
         assertNotNull(helper.getRandomNeighbour(1, 1));
     }
-    
+
     @Test
     public void getRandomNeighbourWithOneValidReturnsIt() {
         helper.getPaths()[1][3] = true;
         Cell valid = new Cell(1, 3);
-        
+
         assertEquals(valid, helper.getRandomNeighbour(1, 1));
     }
-    
-    
+
     @Test
     public void getRandomNeighbourWithTwoValidCells() {
         helper.getPaths()[1][3] = true;
         helper.getPaths()[3][1] = true;
         helper.getPaths()[2][2] = true;
-        
+
         Cell first = new Cell(1, 3);
         Cell second = new Cell(3, 1);
-        
+
         Cell random = helper.getRandomNeighbour(1, 1);
-        
+
         boolean answer = random.equals(first) || random.equals(second);
-        
+
         assertTrue(answer);
     }
-    
+
     @Test
     public void getRandomNeighbourWithThreeValidCells() {
         helper.getPaths()[3][1] = true;
         helper.getPaths()[3][5] = true;
         helper.getPaths()[1][3] = true;
-        
+
         Cell first = new Cell(3, 5);
         Cell second = new Cell(3, 1);
         Cell third = new Cell(1, 3);
-        
+
         Cell random = helper.getRandomNeighbour(3, 3);
-        
+
         boolean answer = random.equals(first) || random.equals(second) || random.equals(third);
-        
+
         assertTrue(answer);
+    }
+    
+    @Test
+    public void clearNewPathsClearsList() {
+        helper.connect(1, 3, 1, 1);
+        helper.clearNewPaths();
+
+        assertTrue(helper.getNewPaths().isEmpty());
     }
 
 }

@@ -12,6 +12,7 @@ public class MazeHelper {
     private boolean[][] paths;
     private boolean[][] frontiers;
     private MazeArray<Cell> frontierCells;
+    private MazeArray<Cell> newPaths;
 
     /**
      * Constructor for MazeHelper, initializes object.
@@ -26,6 +27,8 @@ public class MazeHelper {
         this.paths = new boolean[height][width];
         this.frontiers = new boolean[height][width];
         this.frontierCells = new MazeArray<>();
+        
+        this.newPaths = new MazeArray<>();
     }
 
     /**
@@ -121,13 +124,16 @@ public class MazeHelper {
      */
     public void connect(int startY, int startX, int endY, int endX) {
         this.paths[startY][startX] = true;
+        this.newPaths.add(new Cell(startY, startX));
         //Same row
         if (startX == endX) {
             //start is up
             if (startY < endY) {
                 this.paths[startY + 1][startX] = true;
+                this.newPaths.add(new Cell(startY + 1, startX));
             } else {
                 this.paths[startY - 1][startX] = true;
+                this.newPaths.add(new Cell(startY - 1, startX));
             }
         }
 
@@ -136,8 +142,10 @@ public class MazeHelper {
             //start on left
             if (startX < endX) {
                 this.paths[startY][startX + 1] = true;
+                this.newPaths.add(new Cell(startY, startX + 1));
             } else {
                 this.paths[startY][startX - 1] = true;
+                this.newPaths.add(new Cell(startY, startX - 1));
             }
         }
 
@@ -201,6 +209,22 @@ public class MazeHelper {
      */
     public MazeArray<Cell> getFrontierCells() {
         return frontierCells;
+    }
+    
+    /**
+     * Clears newPaths list, so UI gets only new paths
+     */
+    public void clearNewPaths() {
+        this.newPaths = new MazeArray<>();
+    }
+    
+    /**
+     * Method for Ui to paint new paths
+     * 
+     * @return list containing new paths
+     */
+    public MazeArray<Cell> getNewPaths() {
+        return newPaths;
     }
 
 }

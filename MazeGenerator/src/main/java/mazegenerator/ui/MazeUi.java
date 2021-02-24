@@ -1,6 +1,6 @@
 package mazegenerator.ui;
 
-import javafx.animation.AnimationTimer;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -22,9 +22,7 @@ public class MazeUi extends Application {
     @Override
     public void init() {
         this.n = 55;
-        //this.prim = new Prim(55, 55);
-        this.prim.createMaze();
-        this.kruskal = new Kruskal(11, 11);
+        this.prim = new Prim(n, n, 1, 1);
     }
 
     @Override
@@ -33,10 +31,9 @@ public class MazeUi extends Application {
         screen.setPrefSize(HEIGHT, WIDTH);
 
         double width = 10;
-
         Rectangle[][] rt = new Rectangle[n][n];
 
-        /*
+        
         for (int y = 0; y < n; y++) {
             for (int x = 0; x < n; x++) {
                 rt[y][x] = new Rectangle();
@@ -55,39 +52,10 @@ public class MazeUi extends Application {
                 screen.getChildren().add(rt[y][x]);
             }
         }
-        */
         
         
-        //this.prim = new Prim(55, 55);
+        
 
-        new AnimationTimer() {
-
-            public void handle(long present) {
-                
-                prim.buildMaze();
-
-                for (int y = 0; y < n; y++) {
-                    for (int x = 0; x < n; x++) {
-                        rt[y][x] = new Rectangle();
-                        rt[y][x].setX(y * width);
-                        rt[y][x].setY(x * width);
-                        rt[y][x].setWidth(width);
-                        rt[y][x].setHeight(width);
-                        rt[y][x].setStroke(Color.BLACK);
-
-                        if (prim.getPaths()[y][x]) {
-                            rt[y][x].setFill(Color.WHITE);
-                        } else {
-                            rt[y][x].setFill(Color.BLACK);
-                        }
-
-                        screen.getChildren().add(rt[y][x]);
-                    }
-                }
-
-            }
-
-        }.start();
 
         Scene scene = new Scene(screen);
 
