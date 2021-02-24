@@ -10,6 +10,7 @@ import java.util.Random;
 public class Prim {
 
     private MazeHelper helper;
+    private int y, x;
 
     /**
      * Constructor for Prim, initializes object.
@@ -22,15 +23,16 @@ public class Prim {
     public Prim(int width, int height, int y, int x) {
         helper = new MazeHelper(height, width);
         helper.initMaze(y, x);
+        this.y = y;
+        this.x = x;
     }
 
     /**
      * Creates complete maze using randomized prim's algorithm
      *
-     * @param y starting y coordinate
-     * @param x starting x coordinate
+     * 
      */
-    public void createMaze(int y, int x) {
+    public void createMaze() {
         Random rnd = new Random();
 
         helper.getFrontiers()[y][x] = true;
@@ -56,21 +58,44 @@ public class Prim {
      * Step by step builds the maze
      */
     public void buildMaze() {
-        Random rnd = new Random();
         
         if(!helper.getFrontierCells().isEmpty()) {
-            int index = rnd.nextInt(helper.frontierlistSize());
+            Cell frontier = getRandomFrontier();
+            int frontierY = frontier.getY();
+            int frontierX = frontier.getX();
 
-            Cell frontier = helper.getFrontierCells().get(index);
-            Cell neighbour = helper.getRandomNeighbour(frontier.getY(), frontier.getX());
-
-            helper.connect(frontier.getY(), frontier.getX(), neighbour.getY(), neighbour.getX());
-            helper.addFrontierCells(frontier.getY(), frontier.getX());
-            helper.getPaths()[frontier.getY()][frontier.getX()] = true;
-
-            helper.getFrontierCells().remove(index);
+            makeConnection(frontierY, frontierX);
+            
+            addFrontiers(frontier);
         }
     }
+    
+    /**
+     * Picks the next cell, where the maze expands
+     * 
+     * @return Random frontiercell
+     */
+    public Cell getRandomFrontier() {
+        return helper.getFrontierCells().getRandom();
+    }
+    
+    /**
+     * Connects selected cell to random cell in maze
+     * 
+     * @param frontierY
+     * @param frontierX 
+     */
+    public void makeConnection(int frontierY, int frontierX) {
+        Cell neighbour = helper.getRandomNeighbour(frontierY, frontierX);
+        
+        helper.connect(frontierY, frontierX, neighbour.getY(), neighbour.getX()); 
+    }
+    
+    public void addFrontiers(Cell frontier) {
+        helper.addFrontierCells(frontier.getY(), frontier.getX());
+        helper.getFrontierCells().removeObject(frontier);
+    }
+    
 
     public boolean[][] getPaths() {
         return helper.getPaths();
