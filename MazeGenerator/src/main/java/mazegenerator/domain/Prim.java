@@ -58,6 +58,8 @@ public class Prim {
      * Step by step builds the maze
      */
     public void buildMaze() {
+        helper.clearNewPaths();
+        helper.clearNewFrontiers();
         
         if(!helper.getFrontierCells().isEmpty()) {
             Cell frontier = getRandomFrontier();
@@ -107,6 +109,14 @@ public class Prim {
 
     public boolean[][] getFrontiers() {
         return helper.getFrontiers();
+    }
+    
+    public MazeArray<Cell> getNewPaths() {
+        return helper.getNewPaths();
+    }
+    
+    public MazeArray<Cell> getNewFrontiers() {
+        return helper.getNewFrontiers();
     }
 
 }

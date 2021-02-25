@@ -13,6 +13,7 @@ public class MazeHelper {
     private boolean[][] frontiers;
     private MazeArray<Cell> frontierCells;
     private MazeArray<Cell> newPaths;
+    private MazeArray<Cell> newFrontiers;
 
     /**
      * Constructor for MazeHelper, initializes object.
@@ -29,6 +30,7 @@ public class MazeHelper {
         this.frontierCells = new MazeArray<>();
         
         this.newPaths = new MazeArray<>();
+        this.newFrontiers = new MazeArray<>();
     }
 
     /**
@@ -93,24 +95,28 @@ public class MazeHelper {
         if (validForFrontier(y, rightX)) {
             frontierCells.add(new Cell(y, rightX));
             frontiers[y][rightX] = true;
+            newFrontiers.add(new Cell(y, rightX));
         }
 
         //left
         if (validForFrontier(y, leftX)) {
             frontierCells.add(new Cell(y, leftX));
             frontiers[y][leftX] = true;
+            newFrontiers.add(new Cell(y, leftX));
         }
 
         //up
         if (validForFrontier(upY, x)) {
             frontierCells.add(new Cell(upY, x));
             frontiers[upY][x] = true;
+            newFrontiers.add(new Cell(upY, x));
         }
 
         //down
         if (validForFrontier(downY, x)) {
             frontierCells.add(new Cell(downY, x));
             frontiers[downY][x] = true;
+            newFrontiers.add(new Cell(downY, x));
         }
     }
     
@@ -225,6 +231,14 @@ public class MazeHelper {
      */
     public MazeArray<Cell> getNewPaths() {
         return newPaths;
+    }
+    
+    public void clearNewFrontiers() {
+        this.newFrontiers = new MazeArray<>();
+    }
+    
+    public MazeArray<Cell> getNewFrontiers() {
+        return newFrontiers;
     }
 
 }

@@ -374,5 +374,20 @@ public class MazeHelperTest {
 
         assertTrue(helper.getNewPaths().isEmpty());
     }
+    
+    @Test
+    public void addFrontierCellsAddsFrontiersToNewFrontiers() {
+        helper.initMaze(1, 1);
+        
+        assertEquals(2, helper.getNewFrontiers().size());
+    }
+    
+    @Test
+    public void clearNewFrontiersClearsList() {
+        helper.initMaze(1, 1);
+        helper.clearNewFrontiers();
+        
+        assertTrue(helper.getNewFrontiers().isEmpty());
+    }
 
 }
