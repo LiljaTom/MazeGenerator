@@ -67,16 +67,15 @@ public class MazeUi extends Application {
 
                     rt[y][x].setFill(Color.WHITE);
                 }
-                
-                for(int i = 0; i < prim.getNewFrontiers().size(); i++) {
+
+                for (int i = 0; i < prim.getNewFrontiers().size(); i++) {
                     int y = prim.getNewFrontiers().get(i).getY();
                     int x = prim.getNewFrontiers().get(i).getX();
-                    
+
                     rt[y][x].setFill(Color.RED);
                 }
 
                 prim.buildMaze();
-                
 
                 previous = present;
             }
@@ -89,6 +88,10 @@ public class MazeUi extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 
 }
