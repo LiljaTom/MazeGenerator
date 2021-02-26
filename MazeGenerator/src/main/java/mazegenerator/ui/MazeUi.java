@@ -20,7 +20,7 @@ public class MazeUi extends Application {
 
     @Override
     public void init() {
-        this.n = 55;
+        this.n = 151;
         this.prim = new Prim(n, n, 1, 1);
     }
 
@@ -29,7 +29,7 @@ public class MazeUi extends Application {
         Pane screen = new Pane();
         screen.setPrefSize(HEIGHT, WIDTH);
 
-        double width = 10;
+        double width = 5;
         Rectangle[][] rt = new Rectangle[n][n];
 
         for (int y = 0; y < n; y++) {
@@ -53,7 +53,7 @@ public class MazeUi extends Application {
 
         new AnimationTimer() {
             private long previous = 0;
-            private long sleep = 100 * 1000000;
+            private long sleep = 5;
 
             @Override
             public void handle(long present) {
