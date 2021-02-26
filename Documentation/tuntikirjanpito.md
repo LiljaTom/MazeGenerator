@@ -15,4 +15,7 @@
 | 13.2.2021 | 5 | Kruskalin aloitus, Array luokan laajennus, testejä, dokumentaation kirjoitusta |
 | 18.2.2021 | 3 | Bugien metsästystä ja kruskalin suunnittelua |
 | 19.2.2021 | 6 | Bugien metsästystä, testien uudistamista, korjauksia |
-| yht. | 42 | |
+| 23.2.2021 | 3 | Testien lisääminen |
+| 24.2.2021 | 5 | Luokkien laajennnus ja testien päivitys |
+| 25.2.2021 | 3 | Käyttöliittymän valmistelu |
+| yht. | 50 | |
