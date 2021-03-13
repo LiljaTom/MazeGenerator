@@ -1,7 +1,5 @@
 package mazegenerator.domain;
 
-import java.util.Random;
-
 /**
  * Class which builds maze using prim's algorithm
  *
@@ -33,23 +31,18 @@ public class Prim {
      * 
      */
     public void createMaze() {
-        Random rnd = new Random();
-
-        helper.getFrontiers()[y][x] = true;
-        helper.getPaths()[y][x] = true;
-        helper.addFrontierCells(y, x);
 
         while (!helper.getFrontierCells().isEmpty()) {
-            int index = rnd.nextInt(helper.frontierlistSize());
+            long i = System.nanoTime() % helper.getFrontierCells().size();    
+            int index = (int) i;
+            
+            Cell frontier = getRandomFrontier();
+            int frontierY = frontier.getY();
+            int frontierX = frontier.getX();
 
-            Cell frontier = helper.getFrontierCells().get(index);
-            Cell neighbour = helper.getRandomNeighbour(frontier.getY(), frontier.getX());
-
-            helper.connect(frontier.getY(), frontier.getX(), neighbour.getY(), neighbour.getX());
-            helper.addFrontierCells(frontier.getY(), frontier.getX());
-            helper.getPaths()[frontier.getY()][frontier.getX()] = true;
-
-            helper.getFrontierCells().remove(index);
+            makeConnection(frontierY, frontierX);
+            
+            addFrontiers(frontier);
         }
 
     }

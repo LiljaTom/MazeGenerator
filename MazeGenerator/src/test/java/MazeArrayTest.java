@@ -209,12 +209,30 @@ public class MazeArrayTest {
         Cell rnd2 = new Cell(1, 2);
         array.add(rnd1);
         array.add(rnd2);
-        
+
         Cell rnd = array.getRandom();
-        
+
         boolean answer = rnd.equals(rnd1) || rnd.equals(rnd2);
 
         assertTrue(answer);
+    }
+
+    @Test
+    public void popReturnsNewestValue() {
+        Cell cell1 = new Cell(1, 1);
+        Cell cell2 = new Cell(2, 1);
+        Cell cell3 = new Cell(3, 1);
+
+        array.add(cell1);
+        array.add(cell2);
+        array.add(cell3);
+
+        assertEquals(cell3, array.pop());
+    }
+
+    @Test
+    public void popReturnsNullIfListEmpty() {
+        assertNull(array.pop());
     }
 
 }

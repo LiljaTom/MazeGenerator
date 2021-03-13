@@ -389,5 +389,31 @@ public class MazeHelperTest {
         
         assertTrue(helper.getNewFrontiers().isEmpty());
     }
+    
+    @Test
+    public void getRandomNeighbouringWallReturnsValidCell() {
+        helper.getPaths()[4][6] = true;
+        helper.getPaths()[4][2] = true;
+        helper.getPaths()[2][4] = true;
+        
+        
+        Cell wall = helper.getRandomNeighbouringWall(4, 4);
+        Cell c = new Cell(6, 4);
+        
+        assertEquals(wall, c);
+    }
+    
+    @Test
+    public void getRandomNeighbouringWallReturnsNullIfNoValid() {
+        helper.getPaths()[4][6] = true;
+        helper.getPaths()[4][2] = true;
+        helper.getPaths()[2][4] = true;
+        helper.getPaths()[6][4] = true;
+        
+        
+        Cell wall = helper.getRandomNeighbouringWall(4, 4);
+        
+        assertNull(wall);
+    }
 
 }

@@ -42,6 +42,7 @@ public class MazeHelper {
     public void initMaze(int y, int x) {
         this.paths[y][x] = true;
         addFrontierCells(y, x);
+        newPaths.add(new Cell(y, x));
     }
 
     /**
@@ -181,6 +182,33 @@ public class MazeHelper {
         if(inGrid(downY, x) && paths[downY][x]) {
             neighbours.add(new Cell(downY, x));
         }  
+        
+        return neighbours.getRandom();
+    }
+    
+    public Cell getRandomNeighbouringWall(int y, int x) {
+        MazeArray<Cell> neighbours = new MazeArray<>();
+        
+        int rightX = x + 2;
+        int leftX = x - 2;
+        int upY = y - 2;
+        int downY = y + 2;
+        
+        if(inGrid(y, rightX) && !paths[y][rightX]) {
+            neighbours.add(new Cell(y, rightX));
+        }
+        
+        if(inGrid(y, leftX) && !paths[y][leftX]) {
+            neighbours.add(new Cell(y, leftX));
+        }
+        
+        if(inGrid(upY, x) && !paths[upY][x]) {
+            neighbours.add(new Cell(upY, x));
+        }
+        
+        if(inGrid(downY, x) && !paths[downY][x]) {
+            neighbours.add(new Cell(downY, x));
+        } 
         
         return neighbours.getRandom();
     }
